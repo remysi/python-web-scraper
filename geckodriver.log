@@ -1,0 +1,28 @@
+1696924843907	geckodriver	INFO	Listening on 127.0.0.1:56137
+1696924846902	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "56138" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\KYTTJ~1\\AppData\\Local\\Temp\\rust_mozprofilewsnp76"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1696924847659	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1696924847832	Marionette	INFO	Listening on port 56150
+WebDriver BiDi listening on ws://127.0.0.1:56138
+Read port: 56150
+1696924848247	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:56138/devtools/browser/9df9526e-27af-407b-ba2e-d3d4b3222722
+1696924869699	Marionette	INFO	Stopped listening on port 56150
+Dynamically enable window occlusion 1
+!!! error running onStopped callback: TypeError: callback is not a function
+1696924930325	geckodriver	INFO	Listening on 127.0.0.1:56270
+1696924933323	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "56271" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\KYTTJ~1\\AppData\\Local\\Temp\\rust_mozprofileEDTuvT"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1696924933734	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1696924933883	Marionette	INFO	Listening on port 56279
+WebDriver BiDi listening on ws://127.0.0.1:56271
+Read port: 56279
+1696924934202	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:56271/devtools/browser/d3aaf8ca-afd7-4316-bb19-17f66efc27e6
+JavaScript error: resource:///modules/UrlbarInput.sys.mjs, line 4282: TypeError: engines is undefined
+1696924960466	Marionette	INFO	Stopped listening on port 56279
+Dynamically enable window occlusion 1
