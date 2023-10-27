@@ -1,5 +1,5 @@
 from manually_collected_data_functions import manually_collected_links_to_files
-from scraping import get_page_link
+from scraping import scrape_bing_search_engine
 
 
 # Developer notes and TODO
@@ -14,10 +14,15 @@ from scraping import get_page_link
 # FirefoxDriver = webdriver.Firefox()
 
 
-def main(url):
-    get_page_link(url)
+def main(company_name):
+    # company_name = "Alko"
+    # print(scrape_bing(company_name))
+    # get_page_link()
     # manually_collected_links_to_files()
     # manually_collected_wrong_links_to_files()
+    scrape_bing_search_engine(company_name)
 
-main('https://www.pauliggroup.com/fi')
+
+main('Helen')
+# main('https://www.pauliggroup.com/fi')
 # main('https://www.helen.fi/')
