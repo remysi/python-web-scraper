@@ -1,5 +1,5 @@
 from manually_collected_data_functions import manually_collected_links_to_files
-from scraping import scrape_bing_search_engine
+from scraping import scrape_bing_search_engine, scrape_links
 
 
 # Developer notes and TODO
@@ -20,7 +20,8 @@ def main(company_name):
     # get_page_link()
     # manually_collected_links_to_files()
     # manually_collected_wrong_links_to_files()
-    scrape_bing_search_engine(company_name)
+    # scrape_bing_search_engine(company_name)
+    print(scrape_links('https://www.helen.fi/tietoa-meista/vastuullisuus/vastuullisuus-helenissa/vastuullisuusraportti'))
 
 
 main('Helen')

@@ -1,11 +1,10 @@
 import time
-
 import requests
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+import random
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from bs4 import BeautifulSoup
-
-from urllib.parse import urljoin
 
 from txt_file_factory import link_to_txt_file, all_text_to_txt_file, list_of_links_to_txt_file
 
@@ -36,6 +35,7 @@ def scrape_texts(site):
     all_text_to_txt_file(all_text)
 
 
+'''
 # Gets every link found on a page and calls a function which makes a .txt file of them
 def scrape_links(site):
     reqs = requests.get(site)
@@ -61,6 +61,94 @@ def scrape_links(site):
     print('All links of the page: ', urls)
 
     list_of_links_to_txt_file(urls)
+'''
+
+
+# Made to simulate the AI True/False return
+def random_break_checker(url):
+    # 80% chance of False, 20% chance of True
+    return random.random() > 0.8
+
+
+# Scrapes website links for 'vastuullisuus' keyword
+def scrape_links(site):
+    parent_urls = []
+    child_urls = []
+    url_count = 0
+
+    # Loop until either True value is gotten or 15 urls have been looped through
+    while url_count < 15:
+        reqs = requests.get(site)
+        soup = BeautifulSoup(reqs.text, 'html.parser')
+
+        # Send the url of current page to the dummy function
+        if random_break_checker(site):
+            print(f'URL count brake tsekkeris: {url_count}')
+            # If true was returned, break the loop
+            return 'Vastullisuusraportti löytyi tsekkeris: ' + site
+
+        # Collect every link found on the page to parent_urls list
+        for element in soup.find_all('a'):
+            if 'href' in element.attrs:
+                href = element.get('href')
+                if href.startswith('/'):
+                    full_url = urljoin(site, href)
+                    # Ignores different localization links
+                    if "/fi/" in full_url or "/sv/" in full_url or "/en/" in full_url or "/de/" in full_url:
+                        continue
+                    # If the same url is already on each of the lists, don't add it
+                    if full_url not in parent_urls and full_url not in child_urls:
+                        parent_urls.append(full_url)
+
+        # Check if one of the links in parent_urls has word 'vastuullisuus' in them
+        for url in parent_urls:
+            if 'vastuullisuus' in url:
+                site = url
+                # Send the url of current page to the dummy function
+                if random_break_checker(site):
+                    print(f'URL count parentis: {url_count}')
+                    # If true was returned, break the loop
+                    return 'Vastullisuusraportti löytyi parentis: ' + site
+                break
+        else:
+            # If there is no 'vastuullisuus' in any of the parent_urls links
+            # loop through links on the parent_urls by going to each of those pages
+            for url in parent_urls:
+                reqs = requests.get(url)
+                soup = BeautifulSoup(reqs.text, 'html.parser')
+                for element in soup.find_all('a'):
+                    if 'href' in element.attrs:
+                        href = element.get('href')
+                        if href.startswith('/'):
+                            full_url = urljoin(site, href)
+                            # Ignores different localization links
+                            if "/fi/" in full_url or "/sv/" in full_url or "/en/" in full_url or "/de/" in full_url:
+                                continue
+                            # If the same url is already on each of the lists, don't add it
+                            if full_url not in parent_urls and full_url not in child_urls:
+                                child_urls.append(full_url)
+
+                # Check for 'vastuullisuus' word in child_urls
+                for child_url in child_urls:
+                    if 'vastuullisuus' in child_url:
+                        site = child_url
+                        # Send the url of current page to the dummy function
+                        if random_break_checker(site):
+                            print(f'URL count childis: {url_count}')
+                            # If true was returned, break the loop
+                            return 'Vastullisuusraportti löytyi childis: ' + site
+                        break
+
+                url_count += 1
+                if url_count >= 15:
+                    return 'Amount of requests got too high'
+
+        url_count += 1
+        if url_count >= 15:
+            return 'Amount of requests got too high'
+
+    # If every possible links was checked and no 'vastuullisuus' was found
+    return 'No vastuullisuusraportti was found'
 
 
 # requests version (doesn't support JavaScript)
