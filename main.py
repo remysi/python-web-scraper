@@ -1,5 +1,5 @@
-from manually_collected_data_functions import manually_collected_links_to_files
-from scraping import scrape_bing_search_engine, scrape_links
+from scraping.website_scraping import scrape_website_links_with_keywords
+from txt_file_factory import link_to_txt_file
 
 
 # Developer notes and TODO
@@ -14,16 +14,14 @@ from scraping import scrape_bing_search_engine, scrape_links
 # FirefoxDriver = webdriver.Firefox()
 
 
-def main(company_name):
-    # company_name = "Alko"
-    # print(scrape_bing(company_name))
-    # get_page_link()
-    # manually_collected_links_to_files()
-    # manually_collected_wrong_links_to_files()
-    # scrape_bing_search_engine(company_name)
-    print(scrape_links('https://www.helen.fi/tietoa-meista/vastuullisuus/vastuullisuus-helenissa/vastuullisuusraportti'))
+def main(searched_url, was_it_right_url):
+    log, vastuullisuus_website, did_scraping_work = scrape_website_links_with_keywords(searched_url, was_it_right_url)
+
+    if did_scraping_work:
+        print(log, '\nforwarding the url...')
+        # Creates a folder structure to the project root and makes a .txt file having the found vastuullisuus url.
+        link_to_txt_file('vastuullisuus linkki.txt', 'vastuullisuus linkki', vastuullisuus_website)
 
 
-main('Helen')
 # main('https://www.pauliggroup.com/fi')
-# main('https://www.helen.fi/')
+main('https://www.helen.fi/', False)
